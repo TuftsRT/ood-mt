@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+# pmn 2026
+
+start=$SECONDS
+set -e
+
+# Clean the environment
+module purge
+echo "Modules purged"
+
+module load singularity
+module load ai-tools
+
+echo "Host: ${host}"
+echo "Port: ${port}"
+
+alias mt-python='singularity exec --cleanenv --nv /cluster/tufts/apps/container/ai/images/ python' # need to add image
+export TORCH_FORCE_WEIGHTS_ONLY_LOAD=0
+
+echo "Modules loaded. Beginning ASR..."
+mt-python -m streamlit run "${PWD}/app.py" --server.port "${port}" --server.address 0.0.0.0  --server.headless true  --server.baseUrlPath "/node/${host}/${port}" --browser.gatherUsageStats false --server.enableCORS false --server.enableXsrfProtection false || {
+    echo "Error: ASR failed"
+    exit 1
+}
+
+duration=$(( SECONDS - start  ))
+duration_in_min=$(( duration/60  ))
+echo "MT Process finished in $duration_in_min minutes!"
