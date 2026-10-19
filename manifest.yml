@@ -1,7 +1,7 @@
 ---
-name: Automated Speech Recognition
+name: Machine Translation 
 category: Interactive Apps
 subcategory: AI
 role: batch_connect
 description: |
-  This app allows users to apply a custom ASR workflow to a directory of audio files. 
+  This app allows users to translate text from one language to another. 
