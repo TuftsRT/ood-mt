@@ -3,6 +3,7 @@
 
 start=$SECONDS
 set -e
+shopt -s expand_aliases 
 
 # Clean the environment
 module purge
@@ -14,12 +15,12 @@ module load ai-tools
 echo "Host: ${host}"
 echo "Port: ${port}"
 
-alias mt-python='singularity exec --cleanenv --nv /cluster/tufts/apps/container/ai/images/ python' # need to add image
+alias mt-python='singularity exec --cleanenv --nv /cluster/home/pnadel01/container-apps/images/pnadel_mt:0.0.1.sif python' # need to add image
 export TORCH_FORCE_WEIGHTS_ONLY_LOAD=0
 
-echo "Modules loaded. Beginning ASR..."
+echo "Modules loaded. Beginning MT..."
 mt-python -m streamlit run "${PWD}/app.py" --server.port "${port}" --server.address 0.0.0.0  --server.headless true  --server.baseUrlPath "/node/${host}/${port}" --browser.gatherUsageStats false --server.enableCORS false --server.enableXsrfProtection false || {
-    echo "Error: ASR failed"
+    echo "Erroir: MT failed"
     exit 1
 }
 

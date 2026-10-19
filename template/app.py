@@ -3,7 +3,7 @@ import utils
 
 st.title("Machine Translator")
 
-tokenizer, model = utils.get_model("facebook/nllb-200-distilled-1.3B") # need to change when I move to the cluster
+tokenizer, model = utils.get_model("/cluster/tufts/tuftsai/models/facebook_nllb-200-distilled-1.3B") 
 
 source = st.selectbox(
     "Choose a source language",
