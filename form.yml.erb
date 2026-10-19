@@ -1,0 +1,59 @@
+---
+cluster: "pax"
+bc_dynamic_js: true
+
+attributes:
+  num_cores:
+    widget: "select"
+    label: "Cores"
+    options:
+      - ["2", "2"]
+      - ["4", "4"]
+      - ["8", "8"]
+      - ["12", "12"]
+      - ["16", "16"]
+    value: "8"
+
+  num_memory:
+    widget: "select"
+    label: "Memory"
+    options:
+      - ["4 GB", "4"]
+      - ["8 GB", "8"]
+      - ["16 GB", "16"]
+      - ["32 GB", "32"]
+      - ["64 GB", "64"]
+      - ["96 GB", "96"]
+    value: "32"
+
+  partition:
+    widget: "select"
+    label: "Partition"
+    help: "Jobs submitted to the preempt partition may be terminated to allow higher-priority jobs to run."
+    options:
+      - ["Preempt", "preempt"]
+      - ["GPU", "gpu"]
+    value: "gpu"
+
+  gpu_type:
+    widget: "select"
+    label: "GPU Type"
+    help: "The GPU partition has A100, A100-80GB, and P100 GPUs. The preempt partition supports all listed GPU types."
+    options:
+      - ["Any", "any"]
+      - ["A100 - 40GB", "a100"]
+      - ["A100 - 80GB", "a100-80GB"]
+      - ["P100", "p100"]
+      - ["L40S - 48GB", "l40s"]
+      - ["H200 - 140GB", "h200"]
+      - ["RTX A5000", "rtx_a5000"]
+      - ["RTX A6000", "rtx_a6000"]
+      - ["RTX 6000 Ada", "rtx_6000ada"]
+    value: "l40s"
+
+form:
+  - bc_num_hours
+  - num_cores
+  - num_memory
+  - partition
+  - gpu_type
